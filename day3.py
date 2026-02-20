@@ -13,6 +13,16 @@ class Animal:
             raise ValueError("Name must be a string")
         self._name = value
 
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        if value < 0:
+            raise ValueError("Age cannot be negative")
+        self._age = value
+
     def speak(self):
         print(f"{self.name} says: Hello!")
     

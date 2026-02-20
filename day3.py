@@ -3,6 +3,16 @@ class Animal:
         self._name = name
         self._age = age
 
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if not isinstance(value, str):
+            raise ValueError("Name must be a string")
+        self._name = value
+
     def speak(self):
         print(f"{self.name} says: Hello!")
     

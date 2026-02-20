@@ -1,4 +1,6 @@
-class Animal:
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
     def __init__(self, name, age):
         self._name = name
         self._age = age
@@ -23,21 +25,20 @@ class Animal:
             raise ValueError("Age cannot be negative")
         self._age = value
 
+    @abstractmethod
     def speak(self):
-        print(f"{self.name} says: Hello!")
+        pass
     
 class Dog(Animal):
-    def bark(self):
+    def speak(self):
         print(f"{self.name} says: Woof!")
 
-dog1 = Dog("Buddy", 3)
-dog1.speak()  # Inherited method from Animal
-dog1.bark()   # Method from Dog class
+dog = Dog("Buddy", 3)
+dog.speak()  # Dog's implementation of speak()
 
 class Cat(Animal):
-    def meow(self):
+    def speak(self):
         print(f"{self.name} says: Meow!")
 
 cat = Cat("Asteroid Destroyer", 5)
-cat.speak()  # Inherited method from Animal
-cat.meow()   # Method from Cat class
+cat.speak()  # Cat's implementation of speak()

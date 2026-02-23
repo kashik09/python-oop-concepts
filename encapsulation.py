@@ -1,11 +1,9 @@
-# ENCAPSULATION: Private attributes with getters/setters for controlled access
+# ENCAPSULATION: Private attributes + getters/setters for safe access
 
-from abc import ABC, abstractmethod
-
-class Animal(ABC):
+class Animal:
     def __init__(self, name, age):
-        self._name = name  # Private attribute
-        self._age = age    # Private attribute
+        self._name = name
+        self._age = age
 
     @property
     def name(self):
@@ -27,41 +25,30 @@ class Animal(ABC):
             raise ValueError("Age cannot be negative")
         self._age = value
 
-    @abstractmethod
-    def speak(self):
-        pass
 
 class Dog(Animal):
     def speak(self):
         print(f"{self.name} says: Woof!")
+
 
 class Cat(Animal):
     def speak(self):
         print(f"{self.name} says: Meow!")
 
 
-# Demo - Encapsulation in action
+# Demo
 print("=== Encapsulation Demo ===")
 dog = Dog("Buddy", 3)
-cat = Cat("Asteroid Destroyer", 5)
 
-# Using getters to access private attributes
-print(f"Dog: {dog.name}, Age: {dog.age}")
-print(f"Cat: {cat.name}, Age: {cat.age}")
+# Getter
+print(f"Name: {dog.name}")
 
-# Using setters to update values
+# Setter with validation
 dog.name = "Max"
-dog.age = 7
-print(f"Updated dog: {dog.name}, Age: {dog.age}")
+print(f"Updated: {dog.name}")
 
-# Validation prevents bad data
-print("\nTrying invalid values:")
+# Validation blocks bad data
 try:
-    cat.age = -5
-except ValueError as e:
-    print(f"Error: {e}")
-
-try:
-    dog.name = 123
+    dog.age = -5
 except ValueError as e:
     print(f"Error: {e}")
